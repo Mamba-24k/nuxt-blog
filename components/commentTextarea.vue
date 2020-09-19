@@ -235,6 +235,7 @@ export default {
         })
         .catch((err) => {
           // console.log(err, err.response);
+          this.$message.error(err.response.data);
           if (err.response.status === 429) {
             this.isTooManyRequest = true;
             let limitTime = setInterval(() => {

@@ -3,7 +3,8 @@
     "name": "about",
     "path": "/about",
     "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/about.vue",
-    "chunkName": "pages/about"
+    "chunkName": "pages/about",
+    "_name": "_0def26a0"
   },
   {
     "path": "/",
@@ -14,32 +15,38 @@
         "name": "index",
         "path": "",
         "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/index/index.vue",
-        "chunkName": "pages/index/index"
+        "chunkName": "pages/index/index",
+        "_name": "_b796bb90"
       },
       {
         "name": "index-blog",
         "path": "blog",
         "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/index/blog/index.vue",
-        "chunkName": "pages/index/blog/index"
+        "chunkName": "pages/index/blog/index",
+        "_name": "_2f10b5a2"
       },
       {
         "name": "index-friend",
         "path": "friend",
         "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/index/friend.vue",
-        "chunkName": "pages/index/friend"
+        "chunkName": "pages/index/friend",
+        "_name": "_4fc2b828"
       },
       {
         "name": "index-message",
         "path": "message",
         "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/index/message.vue",
-        "chunkName": "pages/index/message"
+        "chunkName": "pages/index/message",
+        "_name": "_246b1b6d"
       },
       {
         "name": "index-blog-id",
         "path": "blog/:id",
         "component": "/Users/zsx/Desktop/个人项目/nuxt-blog/pages/index/blog/_id.vue",
-        "chunkName": "pages/index/blog/_id"
+        "chunkName": "pages/index/blog/_id",
+        "_name": "_7abb2757"
       }
-    ]
+    ],
+    "_name": "_18c04775"
   }
 ]
