@@ -2,14 +2,11 @@
   <div class="pt-4">
     <div class="d-flex">
       <div class="avatar-box text-center">
-        <img
-          @click="lookUserInfo"
-          v-if="userInfo.avatarImg"
-          :src="userInfo.avatarImg"
-          alt="Mamba 曼巴"
-        />
+        <img @click="lookUserInfo" v-if="avatarImg" :src="userInfo.avatarImg" alt="Mamba 曼巴" />
         <i v-else @click="lookUserInfo" class="iconfont icon-touxiang"></i>
-        <p class="mt-2 avatar text-center fs-xl">{{userInfo.nickName ? userInfo.nickName : '雁过留名'}}</p>
+        <p
+          class="mt-2 avatar text-center fs-xl"
+        >{{ userInfo.nickName ? userInfo.nickName : "雁过留名" }}</p>
       </div>
       <div class="flex-1">
         <el-input
@@ -21,7 +18,13 @@
         ></el-input>
         <div class="mt-3 d-flex jc-between position-emoji">
           <button @blur="showEmoji = false" class>
-            <i class="iconfont icon-weixiao cur-p" @click="showBtn = true; showEmoji = !showEmoji"></i>
+            <i
+              class="iconfont icon-weixiao cur-p"
+              @click="
+                showBtn = true;
+                showEmoji = !showEmoji;
+              "
+            ></i>
             <VEmojiPicker
               @focus="showEmoji = true"
               :showSearch="false"
@@ -38,11 +41,11 @@
       </div>
     </div>
     <el-dialog :append-to-body="true" :visible.sync="dialogVisible" width="300px" center>
-      <div :class="{'turnAnima' : false}">
+      <div :class="{ turnAnima: false }">
         <form-input @toRequest="submit" :isUpload="false" :toForm="userForm"></form-input>
       </div>
     </el-dialog>
-   <slide-verify v-if="isVerifyDialog" @close="closeSlideVerify" @success="successSlideVerify"></slide-verify>
+    <slide-verify v-if="isVerifyDialog" @close="closeSlideVerify" @success="successSlideVerify"></slide-verify>
     <!-- <textarea v-model="input"></textarea>
     <emoji-picker @emoji="insert" :search="search">
       <div slot="emoji-invoker" slot-scope="{ events: { click: clickEvent } }" @click.stop="clickEvent">
@@ -88,13 +91,13 @@ export default {
     parentId: String,
     nickName: String,
     byAiteUserId: String,
-    placeholder: String
+    placeholder: String,
   },
   components: {
     // EmojiPicker,
     VEmojiPicker,
     formInput,
-    slideVerify
+    slideVerify,
   },
   data() {
     return {
@@ -110,20 +113,20 @@ export default {
         email: "",
         url: "",
         avatarImg: "",
-        id: ""
+        id: "",
       },
       dialogVisible: false,
       userForm: {
         nickName: "",
         email: "",
         url: "",
-        avatarImg: ""
+        avatarImg: "",
       },
       qqUrl: "https://q1.qlogo.cn/g?b=qq&nk=QQ号码&s=100",
       userRules: {
         nickName: { required: true, message: "必填", trigger: "change" },
         email: { required: true, message: "必填", trigger: "change" },
-        url: { required: true, message: "必填", trigger: "change" }
+        url: { required: true, message: "必填", trigger: "change" },
       },
       messageObj: {
         nickName: "",
@@ -131,10 +134,10 @@ export default {
         content: "",
         relateBlogId: this.blogsId,
         parent: "",
-        byAiteName: ""
+        byAiteName: "",
       },
-      limitCount: 5, // 定义一个评论频繁，限制的次数
-      timeCha: 60000 // 定义一个评论频繁，等待恢复的时间值
+      timeCha: 60 * 60 * 1000, // 定义一个评论频繁，等待恢复的时间值, 与后端服务一致
+      isTooManyRequest: false,
     };
   },
   created() {},
@@ -142,13 +145,15 @@ export default {
     this.userInfo = localStorage.userInfo
       ? JSON.parse(localStorage.userInfo)
       : this.userInfo;
-    console.log(this.userInfo);
   },
   computed: {
-    ...mapState(["map_user_info", "limit_count"])
+    ...mapState(["map_user_info"]),
+    avatarImg() {
+      return this.userInfo.avatarImg;
+    },
   },
   methods: {
-    ...mapMutations(["map_set_user_info", "vuex_set_limit_count"]),
+    ...mapMutations(["map_set_user_info"]),
     closeSlideVerify() {
       this.isVerifyDialog = false;
       this.btnLoading = false;
@@ -156,7 +161,7 @@ export default {
     successSlideVerify() {
       this.isVerifyDialog = false;
       this.fabuHandle();
-    },    
+    },
     lookUserInfo() {
       this.userForm = this.userInfo;
       this.dialogVisible = true;
@@ -170,31 +175,15 @@ export default {
         return this.$message.warning("陈独秀，请发言");
       }
       let currentUser = await this.$axios.get(`/users/${this.userInfo._id}`);
-      if (currentUser.isFind&&!currentUser.isFind) {
-        return this.$message.warning("你的用户信息有误, 请重新注册！")
+      if (currentUser.isFind && !currentUser.isFind) {
+        return this.$message.warning("你的用户信息有误, 请重新注册！");
       }
       if (currentUser.isSB) {
-        return this.$message.warning("你已被列入黑名单, 禁止评论！")
+        return this.$message.warning("你已被列入黑名单, 禁止评论！");
       }
-      // 目前唯一漏洞： 用户同时刷新当前页面， 并清除sessionStorage，则此限制无效
 
-      // 如果这个时间在跑，说明是禁止评论时间段，则直接 return 提示，不用走下面
-      if (this.timeCha < 60000 && this.timeCha > 0) {
-        this.messageObj.content = "";
-        return this.$message.warning("您评论过于频繁，请稍后再试！");
-      }
-      // 如果评论次数大于等于限定评论次数，则需要启用定时器，并倒计时
-      if (this.limit_count >= 5 || sessionStorage.limitConut >= 5) {
-        let limitTime = setInterval(() => {
-          this.timeCha -= 1000;
-          // 倒计时归零时， 清除定时器、 并归零评论次数, 以及恢复timeCha = 60000
-          if (this.timeCha == 0) {
-            clearInterval(limitTime);
-            sessionStorage.limitConut = 0;
-            this.vuex_set_limit_count(0);
-            this.timeCha = 60000;
-          }
-        }, 1000);
+      // 如果这个isTooManyRequest为true，说明是禁止评论时间段，则直接 return 提示，不用走下面
+      if (this.isTooManyRequest) {
         this.messageObj.content = "";
         return this.$message.warning("您评论过于频繁，请稍后再试！");
       }
@@ -209,29 +198,25 @@ export default {
         this.type == "children" ? this.parentId : "5e52a80981bf76430fd982f0";
       this.messageObj.byAiteName =
         this.type == "children" ? this.nickName : "coco";
-      console.log(this.model);
       let url = this.model == "comments" ? "/comments" : "/messages";
       await this.$axios
         .post(url, this.messageObj)
         .then(async (res) => {
-          // 评论成功一次记录一次 保存vuex和sessionStorage双保险， 分别防止手动删session和刷新页面
-          let count = this.limit_count + 1;
-          sessionStorage.limitConut = count;
-          this.vuex_set_limit_count(count);
           this.$message({
-            message: "博主已收到消息，审核中。。。稍后回复",
+            message: "发布成功，博主已收到消息，稍后回复",
             type: "success",
-            duration: 5000,
+            duration: 2000,
           });
           this.$emit("toResponse");
-          // this.$message.success("发布成功");
 
           this.btnLoading = false;
           if (
             this.userInfo._id == "5e634fed4e0fed3f6e75864d" &&
             this.type == "children"
           ) {
-            let byAiteObj = await this.$axios.get(`/users/${this.byAiteUserId}`);
+            let byAiteObj = await this.$axios.get(
+              `/users/${this.byAiteUserId}`
+            );
             let replyObj = {
               recipient: byAiteObj.email,
               subject: this.messageObj.byAiteName,
@@ -241,30 +226,37 @@ export default {
           } else {
             let toMeEmail = {
               recipient: "765992529@qq.com",
-              subject: "Mamba",
-              html: "你有新消息，请查看",
+              subject: `Hello! Mamba ${this.messageObj.byAiteName} 给你发消息了，请回复！`,
+              html: this.messageObj.content,
             };
             await this.$axios.post("/email", toMeEmail);
           }
           this.messageObj.content = "";
         })
         .catch((err) => {
-          console.log(err)
-          this.$message.error(err.response.data)
+          // console.log(err, err.response);
+          this.$message.error(err.response.data);
+          if (err.response.status === 429) {
+            this.isTooManyRequest = true;
+            let limitTime = setInterval(() => {
+              this.timeCha -= 1000;
+              // 倒计时归零时， 清除定时器、 并归零评论次数, 以及恢复timeCha = 60000
+              if (this.timeCha == 0) {
+                clearInterval(limitTime);
+                this.isTooManyRequest = false;
+                this.timeCha = 60 * 60 * 1000;
+              }
+            }, 1000);
+            this.messageObj.content = "";
+          }
           this.btnLoading = false;
         });
     },
     async submit(userForm) {
-      console.log(userForm);
       userForm.avatarImg = this.qqUrl.replace(
         "QQ号码",
         userForm.email.replace("@qq.com", "")
       );
-      console.log(userForm.email.replace("@qq.com", ""));
-      console.log(
-        this.qqUrl.replace("QQ号码", userForm.email.replace("@qq.com", ""))
-      );
-      console.log(userForm.avatarImg);
       let resData;
       if (this.userInfo._id) {
         resData = await this.$axios.$put(
@@ -280,13 +272,13 @@ export default {
       this.dialogVisible = false;
     },
     selectEmoji(emoji) {
-      console.log(emoji);
+      // console.log(emoji);
       this.messageObj.content += emoji.data;
     },
     insert(emoji) {
       this.input += emoji;
-    }
-  }
+    },
+  },
 };
 </script>
 

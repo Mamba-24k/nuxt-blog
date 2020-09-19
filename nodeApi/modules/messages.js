@@ -6,7 +6,7 @@ const schema = new mongoose.Schema({
     userId: {type: mongoose.SchemaTypes.ObjectId, ref: 'Users'},
     parent: {type: mongoose.SchemaTypes.ObjectId, ref: 'Messages'},
     byAiteName:{type: String},
-    isPass:{type: Boolean,default: false},
+    isPass:{type: Boolean,default: true},
 },{
     timestamps: true
 })

@@ -10,8 +10,7 @@ export const state = () => ({
     headerDown: '未完待续。。。',
     footerUp: 'Mamba is not out',
     footerDown: "I'm here all the time!",
-  },
-  limit_count: 0
+  }
 })
 
 export const mutations = {
@@ -20,8 +19,5 @@ export const mutations = {
   },
   vuex_set_skin_obj(state,data) {
     state.vuex_skin_obj = data
-  },
-  vuex_set_limit_count(state,data) {
-    state.limit_count = data
   }
 }

@@ -139,12 +139,9 @@ export default {
 
   },
   beforeMount() {
-    console.log(document.body.clientWidth)
     this.clientWidth = document.body.clientWidth
-    console.log(this.userInfo);
         this.userInfo = (localStorage.userInfo &&
         JSON.parse(localStorage.userInfo)) || { _id: "" }
-    console.log(this.userInfo);
   },
   filters: {
     formatDate(val) {

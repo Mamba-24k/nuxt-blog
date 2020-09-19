@@ -72,7 +72,6 @@ export default {
   },
   watch: {
     isUpload(newV, oldV) {
-      console.log(newV)
       if (newV) {
         this.userRules.description.required = true
         this.userRules.avatarImg.required = true
@@ -86,7 +85,6 @@ export default {
     }
   },
   created() {
-    console.log(this.isUpload)
       if (this.isUpload) {
         this.userRules.description.required = true
         this.userRules.avatarImg.required = true
@@ -97,7 +95,6 @@ export default {
         this.userRules.qqEmail.required = false
         this.userRules.url.required = false   
       }
-      console.log(this.userRules.url)
     this.userForm = this.toForm ? this.toForm : this.userForm 
   },
   methods: {
@@ -107,13 +104,12 @@ export default {
         if (valid) {
           this.$emit("toRequest", this.userForm);
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
     },
     beforeAvatarUpload(file) {
-      console.log(file)
+      // console.log(file)
         const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
         const isLt2M = file.size / 1024 / 1024 < 0.2;
         if (!isJPG) {

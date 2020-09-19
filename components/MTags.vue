@@ -37,11 +37,9 @@ export default {
         el.color = this.color[Math.floor(e%5)]
         el.children = tagsList.filter(c => c.parent == el._id)
       });
-      console.log(this.parentTagsList)
     },
     searchBlogs(id,i) {
       this.tagIndex = i
-      console.log(this.tagIndex, i)
       this.$emit('searchlist',id)
     }
   }

@@ -145,7 +145,6 @@ export default {
       let data = await this.$axios.$get(`/blogs/${this.id}`);
       this.blogsDetails = data;
       let tocData = buildToc(marked(data.content));
-      console.log(tocData);
       this.blogsDetails.content = tocData.article;
       this.articleToc = tocData.toc;
       this.$nextTick(() => {
@@ -160,7 +159,6 @@ export default {
     },
     async getBlogsComments() {
       let data = await this.$axios.$get(`/comments/${this.id}`);
-      console.log(data);
       let blogsComments = data;
       this.parentComments = blogsComments.filter(
         v => v.parent == "5e52a80981bf76430fd982f0"

@@ -13,7 +13,6 @@ module.exports = app => {
   // 博文相关接口
   router.post('/web/blogs', async (req, res) => {
     let model = await Blogs.create(req.body)
-    console.log("12", model)
     res.send(model)
   })
   router.post('/web/blogs/:pageNum/:pageSize', async (req, res) => {
@@ -48,7 +47,6 @@ module.exports = app => {
     }).limit(2)
     await Blogs.update({_id : req.params.id}, {$inc : {views : 1}})
 
-    console.log("21", model)
     res.send(model)
   })
   // 博文标签接口
@@ -61,12 +59,10 @@ module.exports = app => {
   })
   router.delete('/web/blogs/:id', async (req, res) => {
     let model = await Blogs.findByIdAndDelete(req.params.id)
-    console.log("25", model)
     res.send(model)
   })
   router.put('/web/blogs/:id', async (req, res) => {
     let model = await Blogs.findByIdAndUpdate(req.params.id, req.body)
-    console.log("31", model)
     res.send(model)
   })
   router.put('/web/blogs/likes/:id', async (req, res) => {
@@ -74,28 +70,23 @@ module.exports = app => {
       // { likes: req.body.likes },
       {$inc : {likes : 1}}
     )
-    console.log("31", model)
     res.send(model)
   })
    // 用户相关接口
   router.post('/web/users', async (req, res) => {
     let model = await Users.create(req.body)
-    console.log("12", model)
     res.send(model)
   })
   router.get('/web/users', async (req, res) => {
     let model = await Users.find()
-    console.log("12", model)
     res.send(model)
   })
   router.put('/web/users/:id', async (req, res) => {
     let model = await Users.findByIdAndUpdate(req.params.id,req.body)
-    console.log("12", model)
     res.send(model)
   })
   router.get('/web/users/:id', async (req, res) => {
     let model = await Users.findById(req.params.id)
-    console.log("12", model)
     if (!model) {
       model = {
         isFind: false
@@ -106,7 +97,6 @@ module.exports = app => {
   // 发送邮件接口
   const sendEmail = require('../../pluglins/sendEmail.js')
   router.post('/web/email', async (req, res) => {
-    console.log(req.body)
     sendEmail(req.body)
     res.send({ok: 'ok'})
   })
@@ -118,43 +108,36 @@ module.exports = app => {
       // { msgs: req.body.msgs },
       {$inc : {msgs : 1}}
       )
-    console.log("12", model)
     res.send(model)
   })
   router.get('/web/comments/:blogsId', async (req, res) => {
     const comments = await Comments.find().where({ relateBlogId: req.params.blogsId })
-    console.log(comments)
     res.send(comments.filter(v => v.isPass))
   })
 
   // 留言相关接口
   router.post('/web/messages', apiLimiter,async (req, res) => {
     let model = await Messages.create(req.body)
-    console.log("12", model)
     res.send(model)
   })
   router.get('/web/messages', async (req, res) => {
     // console.log("123",await Blogs.findOne({
     //     _id: req.params.blogsId}))
     const messages = await Messages.find()
-    console.log(messages)
     res.send(messages.filter(v => v.isPass))
   })
 
   // web圈相关接口
   router.post('/web/friends', async (req, res) => {
     let model = await Friends.create(req.body)
-    console.log("12", model)
     res.send(model)
   })
   router.get('/web/friends', async (req, res) => {
     let model = await Friends.find()
-    console.log("12", model)
     res.send(model)
   })
   router.put('/web/friends/:id', async (req, res) => {
     let model = await Friends.findByIdAndUpdate(req.params.id,req.body)
-    console.log("12", model)
     res.send(model)
   })
 
@@ -182,7 +165,6 @@ module.exports = app => {
   // 获取服务器时间
   router.get('/web/time', async (req, res) => {
     let time = new Date().getTime()
-    console.log('time',time)
     res.send({'data': time})
   })
   app.use(router)

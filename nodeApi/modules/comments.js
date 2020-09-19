@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
     relateBlogId: {type: mongoose.SchemaTypes.ObjectId, ref: 'Blogs'},
     parent: {type: mongoose.SchemaTypes.ObjectId, ref: 'Comments'},
     byAiteName:{type: String},
-    isPass:{type: Boolean,default: false},
+    isPass:{type: Boolean,default: true},
 },{
     timestamps: true
 })

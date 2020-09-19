@@ -10,7 +10,10 @@ module.exports = app => {
     //     }
     //   }
     // }
-    app.use(require("cors")({credentials: true,origin: true}))
+    app.use(require("cors")({
+        credentials: true,
+        // origin: true // 本地运行放开， 线上务必注释此行
+    }))
     app.use(express.json())
     // 本地静态文件托管 
     app.use('/uploads',express.static(__dirname+'/uploads'))

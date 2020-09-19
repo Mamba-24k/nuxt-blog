@@ -97,7 +97,7 @@ export default {
         originX = e.clientX || e.touches[0].clientX;
         originY = e.clientY || e.touches[0].clientY;
         isMouseDown = true;
-        console.log(originX);
+        // console.log(originX);
       };
 
       const handleDragMove = e => {
@@ -114,7 +114,7 @@ export default {
         addClass(this.sliderContainerDom, "sliderContainer_active");
         this.sliderMaskDom.style.width = moveX + "px";
         trail.push(moveY);
-        console.log(moveX);
+        // console.log(moveX);
       };
 
       const handleDragEnd = e => {
@@ -264,7 +264,7 @@ export default {
         "sliderContainer"
       )[0];
       this.sliderMaskDom = document.getElementsByClassName("sliderMask")[0];
-      console.log(this.sliderDom);
+      // console.log(this.sliderDom);
     },
     createCanvas(width, height) {
       const canvas = document.createElement("canvas");

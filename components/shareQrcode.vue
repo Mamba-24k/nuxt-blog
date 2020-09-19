@@ -55,11 +55,9 @@ export default {
   },
   created() {},
   mounted() {
-    console.log(window);
     var canvas = document.getElementById("canvas");
     QRCode.toCanvas(canvas, window.location.href, function(error) {
       if (error) console.error(error);
-      console.log("success!");
     });
   },
   methods: {}

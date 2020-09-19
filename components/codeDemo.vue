@@ -67,12 +67,10 @@ export default {
   },
   methods: {
     changeOwn(study = false, days = 365) {
-      console.log(study, days)
       let everyDay = 1;
       let own = 0;
       everyDay = study ? everyDay + 0.01 : everyDay - 0.01;
       own = Math.pow(everyDay, days);
-      console.log(own);
       this.number = own;
       this.load = false;
       this.$nextTick(() => {

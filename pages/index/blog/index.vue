@@ -87,7 +87,6 @@ export default {
     async getBlogslist() {
       this.moreLoading = true;
       let data = await this.$axios.$post(`/blogs/${this.pageNum}/${this.pageSize}`, {tags: this.tag});
-      console.log(data);
       this.blogList = this.blogList.concat(data.rows);
       this.total = data.total;
       this.moreLoading = false;
@@ -116,7 +115,6 @@ export default {
       let data = await this.$axios.$put(`/blogs/likes/${item._id}`, {
         likes: item.likes + 1
       });
-      console.log(data);
     }
   }
 };

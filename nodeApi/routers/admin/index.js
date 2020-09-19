@@ -10,13 +10,11 @@ module.exports = app => {
     // 新增
     router.post('/', async(req,res) => {
         let model = await req.module.create(req.body)
-        console.log("12",model)
         res.send(model)
     })
     // 查询得到List
     router.get('/', async (req,res) => {
         let model = await req.module.find().populate('parent tags')
-        console.log('module',req.params)
         if (req.params.resource === 'tags') {
             console.log('进来')
             model.forEach(m => {
@@ -28,19 +26,16 @@ module.exports = app => {
     // 根据id查询得到某一项
     router.get('/:id', async (req,res) => {
         let model = await req.module.findById(req.params.id)
-        console.log("21",model)
         res.send(model)
     })
     // 根据id查询并删除
     router.delete('/:id', async (req,res) => {
         let model = await req.module.findByIdAndDelete(req.params.id)
-        console.log("25",model)
         res.send(model)
     })
     // 根据id查询并修改更新
     router.put('/:id', async (req,res) => {
         let model = await req.module.findByIdAndUpdate(req.params.id,req.body)
-        console.log("31",model)
         res.send(model)
     })
     // 以上所有数据模块的增删改查接口路径的通用入口
@@ -75,12 +70,10 @@ module.exports = app => {
     })
     app.get('/admin/ossList', authMiddleware(app), async (req,res) => {
         let result = await client.list();
-        console.log(result)
         res.send(result)
     })
     app.delete('/admin/ossList/:name', authMiddleware(app), async (req,res) => {
         let result = await client.delete(req.params.name);
-        console.log(result)
         res.send(result)
     })
     // admin管理员账号登陆

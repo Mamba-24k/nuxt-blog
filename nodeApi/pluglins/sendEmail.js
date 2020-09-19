@@ -42,9 +42,7 @@ var sendMail = function (replyObj) {
  
     }, function (error, response) {
         if (error) {
-            console.log(error);
         }
-        console.log('发送成功')
     });
 }
  

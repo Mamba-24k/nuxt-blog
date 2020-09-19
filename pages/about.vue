@@ -110,7 +110,6 @@ export default {
   },
   methods: {
     changeIndex(i) {
-      console.log(i);
       this.carouseIndex = i;
     }
   }

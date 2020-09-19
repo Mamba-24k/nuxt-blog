@@ -67,7 +67,7 @@ export default {
     },
     timeupdate() {
       this.currentTime = this.$refs.music.currentTime;
-      console.log(this.currentTime);
+      // console.log(this.currentTime);
       this.currentTimeStr = this.timeToStr(this.currentTime);
       if (this.currentTime > this.$refs.music.duration) {
         this.$refs.playProcess.style.width = "0px";
@@ -76,12 +76,12 @@ export default {
         this.$refs.playProcess.style.width =
           (this.currentTime / Math.floor(this.$refs.music.duration)) * 150 +
           "px";
-        console.log(this.$refs.playProcess.style.width);
+        // console.log(this.$refs.playProcess.style.width);
       }
     },
     // 点击进度
     updateProcess(e) {
-      console.log(e.offsetX);
+      // console.log(e.offsetX);
       this.$refs.music.currentTime =
         (e.offsetX / 150) * this.$refs.music.duration;
     },
