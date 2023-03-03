@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@babel/preset-env": "^7.12.17",
     "ali-oss": "^6.5.1",
     "bcrypt": "^3.0.8",
     "cors": "^2.8.5",
@@ -37,7 +38,6 @@
     "vue-stick": "^1.0.7"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.12.17",
     "babel-plugin-component": "^1.1.1",
     "copy-webpack-plugin": "^5.1.1",
     "node-sass": "^4.13.1",
