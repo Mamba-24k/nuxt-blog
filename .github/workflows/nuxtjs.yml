@@ -58,7 +58,7 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: nuxt
-          token: ${{ secrets.NUXTSECTRT }}
+          token: ${{ secrets.TOKEN }}
           enablement: false
       - name: Restore cache
         uses: actions/cache@v3
