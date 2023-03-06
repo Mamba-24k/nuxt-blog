@@ -76,7 +76,7 @@ jobs:
           # 6. pm2.config.json 是 启动 项目，( npm start )
         script: | 
           cd blog-nuxt
-          wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/296859443/2367aaa5-c8fb-40f6-ae41-8d7d4acf37f2?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230306%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230306T125716Z&X-Amz-Expires=300&X-Amz-Signature=2cb4edd1e9cafc533c14781c48de129d13e2d4f3ad106ea291d2831df9b404b5&X-Amz-SignedHeaders=host&actor_id=44518640&key_id=0&repo_id=296859443&response-content-disposition=attachment%3B%20filename%3Drelease.tgz&response-content-type=application%2Foctet-stream -O release.tgz
+          wget https://github.com/Mamba-24k/nuxt-blog/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm install --production
           npm run pm2
