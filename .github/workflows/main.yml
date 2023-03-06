@@ -68,7 +68,7 @@ jobs:
         password: ${{ secrets.PASSWORD }} # 密码
         port: ${{ secrets.PORT }} # 端口
         # 类似在服务端的终端-执行以下操作
-          # 1. 找到需要存放文件的地方
+          # 1. 找到需要存放文件的地方 
           # 2. 从 Github 上将 release.tgz 复制一份放入文件内
           # 3. 解压 release.tgz 文件
           # 4. 安装插件
