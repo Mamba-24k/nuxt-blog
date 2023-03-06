@@ -4,8 +4,8 @@ name: Publish And Deploy Demo
 # 触发部署的条件: 当 master 分支, 有 push 的操作, 即可触发。
 on:
   push:
-    branches: # 此处不仅限于监听分支, 还可监听 tag
-      - master
+#     branches: # 此处不仅限于监听分支, 还可监听 tag
+#       - master
     tags:
       - 'v*'
     paths-ignore: # 下列文件的变更不触发部署，可以自行添加
