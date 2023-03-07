@@ -75,9 +75,9 @@ jobs:
           # 5. 重启 pm2, 并执行 pm2.config.json 内操作，
           # 6. pm2.config.json 是 启动 项目，( npm start )
         script: | 
-          cd blog-nuxt
+          cd /var/www/html/data/github-actions-nuxt-blog
           wget https://github.com/Mamba-24k/nuxt-blog/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm install
-          pm2 start npm --name blog-nuxt -- run start
+          pm2 start npm --name github-actions-nuxt-blog -- run start
           
