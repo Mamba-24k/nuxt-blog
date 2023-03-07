@@ -71,7 +71,7 @@ module.exports = {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8727/web' : 'https://www.coco727.com/web',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8727/web' : window.location.origin,
     credentials: true
   },
   /*
