@@ -79,5 +79,5 @@ jobs:
           wget https://github.com/Mamba-24k/nuxt-blog/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm install
-          npm run pm2
+          pm2 start npm --name blog-nuxt -- run start
           
