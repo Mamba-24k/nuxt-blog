@@ -1,0 +1,9 @@
+{
+  "apps": [
+    {
+      "name": "release-nuxt-blog",
+      "script": "npm",
+      "args": "start"
+    }
+  ]
+}

@@ -84,5 +84,6 @@ jobs:
           npm install
           # npm run build
           cp static/favicon.ico .nuxt/dist/client/img
-          pm2 restart clone-nuxt-blog
+          # pm2 restart clone-nuxt-blog
+          pm2 reload pm2.config.json
           
