@@ -81,7 +81,7 @@ module.exports = {
     baseURL:
       process.env.NODE_ENV === "development"
         ? "http://127.0.0.1:8727/web"
-        : "https://www.coco727.com/web",
+        : "https://www.coco727.com/web", // 这里得写全路径
     credentials: true,
   },
   /*

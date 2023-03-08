@@ -294,8 +294,9 @@ export default {
   font-size: 18px;
   position: relative;
   & > div {
-    width: 48px;
+    min-width: 48px;
     height: 48px;
+    padding: 0 5px;
     background-color: var(--less);
     margin: 0 5px;
     color: var(--more);

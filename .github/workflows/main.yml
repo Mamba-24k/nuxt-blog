@@ -17,17 +17,17 @@ jobs:
     runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
     steps: # 进入自动化步骤
 
-    # 第一步，下载代码仓库
-    - name: Checkout
-      uses: actions/checkout@master 
+    # # 第一步，下载代码仓库
+    # - name: Checkout
+    #   uses: actions/checkout@master 
 
-    # 打包构建 
-    - name: Build
-      uses: actions/setup-node@master
-      with:
-        node-version: '13.8.0'
-    - run: npm install
-    - run: npm run build
+    # # 打包构建 
+    # - name: Build
+    #   uses: actions/setup-node@master
+    #   with:
+    #     node-version: '13.8.0'
+    # - run: npm install
+    # - run: npm run build
     # 将这些 .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json 文件打包在 release.tgz 中
      # 此处是为了在方便，在服务器中直接解压，获得所有文件，无需单独传
      # pm2 帮助我们在 Node服务器，启动项目的一个工具，具体可查看官网 https://github.com/Unitech/pm2
@@ -75,11 +75,9 @@ jobs:
           # 5. 重启 pm2, 并执行 pm2.config.json 内操作，
           # 6. pm2.config.json 是 启动 项目，( npm start )
         script: | 
-          mkdir github-actions-nuxt-blog
-          cd github-actions-nuxt-blog
           git clone https://github.com/Mamba-24k/nuxt-blog.git
           cd nuxt-blog
           npm install
           npm run build
-          pm2 start npm --name github-actions-nuxt-blog -- run start
+          pm2 start npm --name clone-nuxt-blog -- run start
           

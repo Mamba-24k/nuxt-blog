@@ -30,6 +30,7 @@
   .textGrad-#{$dire} {
     background: linear-gradient(to $dire, var(--less) 5%, var(--more));
     background-clip: text;
+    -webkit-background-clip: text;
     color: transparent;
   };
 }
