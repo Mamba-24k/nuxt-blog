@@ -77,7 +77,8 @@ jobs:
         script: | 
           git clone https://github.com/Mamba-24k/nuxt-blog.git
           cd nuxt-blog
-          npm install
+          # npm install
           npm run build
-          pm2 start npm --name clone-nuxt-blog -- run start
+          cp static/favicon.ico .nuxt/dist/client/img
+          pm2 restart clone-nuxt-blog
           
