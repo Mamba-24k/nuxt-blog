@@ -76,15 +76,15 @@ jobs:
           # 5. 重启 pm2, 并执行 pm2.config.json 内操作，
           # 6. pm2.config.json 是 启动 项目，( npm start )
         script: | 
-          mkdir release-nuxt-blog
-          cd release-nuxt-blog
-          wget https://github.com/Mamba-24k/nuxt-blog/releases/latest/download/release.tgz -O release.tgz
-          tar zxvf release.tgz
-          # git clone https://github.com/Mamba-24k/nuxt-blog.git
-          # cd nuxt-blog
+          # mkdir release-nuxt-blog
+          # cd release-nuxt-blog
+          # wget https://github.com/Mamba-24k/nuxt-blog/releases/latest/download/release.tgz -O release.tgz
+          # tar zxvf release.tgz
+          git clone https://github.com/Mamba-24k/nuxt-blog.git
+          cd nuxt-blog
           npm install
-          # npm run build
+          npm run build
           cp static/favicon.ico .nuxt/dist/client/img
-          # pm2 restart clone-nuxt-blog
-          pm2 reload pm2.config.json
+          pm2 restart nuxt-blog
+          # pm2 reload pm2.config.json
           
